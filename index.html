@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  
+  <!-- Primary SEO Metadata -->
+  <title>G E M — Personal Profile</title>
+  <meta name="title" content="G E M — Personal Profile">
+  <meta name="description" content="Official personal profile of G E M. Dark anime aesthetic bio page with cinematic video background, music, and interactive features.">
+  <meta name="keywords" content="GEM, guns.lol, anime profile, bio page, portfolio, aesthetic, dark theme, cyber">
+  <meta name="author" content="G E M">
+  <meta name="theme-color" content="#0e3822">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="profile">
+  <meta property="og:url" content="https://guns.lol/gem">
+  <meta property="og:title" content="G E M — Personal Profile">
+  <meta property="og:description" content="Official personal profile of G E M. Dark anime aesthetic, ambient music, and social links.">
+  <meta property="og:image" content="assets/avatar.jpg">
+
+  <!-- Twitter Card -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:title" content="G E M — Personal Profile">
+  <meta property="twitter:description" content="Official personal profile of G E M. Dark anime aesthetic, ambient music, and social links.">
+  <meta property="twitter:image" content="assets/avatar.jpg">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/jpeg" href="assets/avatar.jpg">
+  <link rel="apple-touch-icon" href="assets/avatar.jpg">
+
+  <!-- Google Fonts Preconnect -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400;1,500;1,600&family=JetBrains+Mono:wght@400;500;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="loading-state">
+
+  <!-- Central Configuration Script -->
+  <script src="config.js"></script>
+
+  <!-- Custom Cursor Elements (Desktop only) -->
+  <div class="custom-cursor" id="customCursor" aria-hidden="true">
+    <div class="cursor-dot" id="cursorDot"></div>
+    <div class="cursor-ring" id="cursorRing"></div>
+  </div>
+
+  <!-- Background Media & Particle Canvas -->
+  <div class="bg-wrapper" id="bgWrapper">
+    <!-- Video Element with Auto-Crop & Adaptive Coverage for PC & Mobile -->
+    <video id="bgVideo" class="bg-video" autoplay loop muted playsinline webkit-playsinline x5-playsinline preload="auto">
+      <source id="bgVideoSource" src="assets/background.mp4" type="video/mp4">
+      <!-- Fallback message for browsers without HTML5 video -->
+      Your browser does not support the video tag.
+    </video>
+
+    <!-- Fallback Graphic Poster (Active if video fails) -->
+    <div class="bg-fallback-poster" id="bgFallbackPoster" aria-hidden="true"></div>
+
+    <!-- Dark Vignette Overlay -->
+    <div class="bg-overlay" id="bgOverlay" aria-hidden="true"></div>
+
+    <!-- Cinematic Scanline Texture -->
+    <div class="bg-scanlines" aria-hidden="true"></div>
+
+    <!-- Floating Dust & Embers Canvas -->
+    <canvas id="particlesCanvas" class="particles-canvas" aria-hidden="true"></canvas>
+  </div>
+
+  <!-- Entry Screen ("CLICK TO ENTER") -->
+  <div id="entryScreen" class="entry-screen" role="button" tabindex="0" aria-label="Click anywhere to enter profile">
+    <div class="entry-content">
+      <span class="entry-tag">// SYSTEM INITIALIZING</span>
+      <h1 class="entry-title" id="entryTitle">
+        <span class="letter-glow">C</span>LICK TO ENTER
+      </h1>
+      <p class="entry-subtitle" id="entrySubtitle">
+        <span class="headphone-icon">🎧</span> best experienced with sound
+      </p>
+      <div class="entry-pulse-ring" aria-hidden="true"></div>
+      <span class="entry-hint">[ CLICK ANYWHERE OR PRESS SPACE ]</span>
+    </div>
+  </div>
+
+  <!-- Floating Quick Controls Bar (Top Dock) -->
+  <header class="top-controls-bar" id="topControlsBar" aria-label="Website Controls">
+    
+    <!-- Audio Mini-Player Widget -->
+    <div class="audio-widget" id="audioWidget" role="region" aria-label="Audio Player">
+      <button class="control-btn audio-toggle-btn" id="audioToggleBtn" title="Play / Pause Music" aria-label="Play / Pause Music">
+        <span class="btn-icon" id="audioPlayIcon">
+          <!-- Play / Pause SVG dynamically inserted -->
+        </span>
+      </button>
+
+      <!-- Equalizer Visualizer Bars -->
+      <div class="equalizer-bars" id="equalizerBars" aria-hidden="true" title="Audio Visualizer">
+        <span class="bar bar-1"></span>
+        <span class="bar bar-2"></span>
+        <span class="bar bar-3"></span>
+        <span class="bar bar-4"></span>
+      </div>
+
+      <!-- Audio Track Info -->
+      <div class="audio-track-info" id="audioTrackInfo">
+        <span class="track-title" id="trackTitle">Midnight Drift</span>
+        <span class="track-artist" id="trackArtist">G E M</span>
+      </div>
+
+      <!-- Volume Controls Group -->
+      <div class="volume-control-group">
+        <button class="control-btn volume-mute-btn" id="volumeMuteBtn" title="Mute / Unmute Audio" aria-label="Mute / Unmute Audio">
+          <span class="btn-icon" id="volumeIcon">
+            <!-- Dynamic Volume Icon -->
+          </span>
+        </button>
+        <div class="volume-slider-wrapper">
+          <input type="range" class="volume-slider" id="volumeSlider" min="0" max="1" step="0.01" value="0.35" aria-label="Volume Slider">
+        </div>
+      </div>
+    </div>
+
+    <!-- Quick Action Utilities -->
+    <div class="quick-utilities">
+      <!-- Video Mute / Pause Toggle -->
+      <button class="control-btn util-btn" id="videoToggleBtn" title="Mute / Unmute Video Background" aria-label="Mute / Unmute Video Background">
+        <span class="btn-icon" id="videoIcon">
+          <!-- Dynamic Video Icon -->
+        </span>
+      </button>
+
+      <!-- Copy Profile URL -->
+      <button class="control-btn util-btn" id="copyUrlBtn" title="Copy Profile Link" aria-label="Copy Profile Link">
+        <span class="btn-icon" id="copyIcon">
+          <!-- Copy Link SVG -->
+        </span>
+      </button>
+
+      <!-- Fullscreen Toggle -->
+      <button class="control-btn util-btn" id="fullscreenBtn" title="Toggle Fullscreen" aria-label="Toggle Fullscreen">
+        <span class="btn-icon" id="fullscreenIcon">
+          <!-- Fullscreen SVG -->
+        </span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Content: Centered Profile Card (guns.lol style) -->
+  <main class="main-container" id="mainContainer">
+    <article class="profile-card guns-card" id="profileCard" tabindex="0" aria-label="G E M Profile Card">
+      
+      <!-- guns.lol Top Title Header -->
+      <div class="guns-title-header">
+        <h2 class="guns-header-title" id="gunsTitle">MӨVΣ ӨП!</h2>
+      </div>
+
+      <!-- guns.lol Signature Discord Presence Card -->
+      <div class="guns-presence-card" id="gunsPresenceCard">
+        <div class="presence-avatar-wrap">
+          <img id="profileAvatar" src="assets/avatar.jpg" alt="Avatar" class="presence-avatar" loading="eager">
+          <!-- Discord Status Presence Badge (dnd / online / idle) -->
+          <div class="presence-status-badge dnd" id="presenceStatusBadge" title="Status: Do Not Disturb" aria-label="Status: Do Not Disturb">
+            <span class="dnd-symbol"></span>
+          </div>
+        </div>
+        <div class="presence-info">
+          <div class="presence-user-row">
+            <span class="presence-username" id="profileUsername">G E M</span>
+            <span class="verified-badge" id="verifiedBadge" title="Verified Profile" aria-label="Verified Profile">
+              <!-- Verified Checkmark SVG -->
+            </span>
+          </div>
+          <div class="presence-activity" id="presenceActivity">
+            <span class="activity-emoji" id="activityEmoji">🎧</span>
+            <span class="activity-text" id="activityText">ozoii.</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Badges / Roles Pill Container -->
+      <div class="badges-container" id="badgesContainer" aria-label="User Badges">
+        <!-- Badges dynamically injected from config.js -->
+      </div>
+
+      <!-- Bio Section -->
+      <div class="bio-section" id="bioSection">
+        <p class="profile-bio" id="profileBio">
+          <span class="bio-quote">“</span><span class="bio-text" id="bioText">just a human being</span><span class="bio-quote">”</span>
+        </p>
+      </div>
+
+      <!-- Social Media Buttons Row (guns.lol icon layout) -->
+      <nav class="social-links-grid guns-socials" id="socialLinksGrid" aria-label="Social Media Profiles">
+        <!-- Social buttons dynamically injected from config.js -->
+      </nav>
+
+      <!-- guns.lol Bottom Card Stats Bar (Views count on left, live clock on right) -->
+      <div class="guns-card-bottom-bar" id="gunsCardBottomBar">
+        <div class="bottom-stat views-stat" id="viewsItem" title="Real Global Visitor Counter">
+          <span class="stat-icon" id="viewsIcon"></span>
+          <span class="stat-text" id="viewsText">-- views</span>
+        </div>
+        <div class="bottom-stat clock-stat" id="clockItem" title="Live Current Local Time">
+          <span class="stat-icon" id="clockIcon"></span>
+          <span class="stat-text" id="clockDisplay">--:--:--</span>
+        </div>
+      </div>
+
+    </article>
+  </main>
+
+  <!-- Interactive Toast Notification Popup -->
+  <aside id="toastNotification" class="toast-notification" role="alert" aria-live="assertive" aria-hidden="true">
+    <div class="toast-icon" id="toastIcon"></div>
+    <div class="toast-message" id="toastMessage">Notification message</div>
+  </aside>
+
+  <!-- Audio Element (Controlled by script.js) -->
+  <audio id="bgAudio" preload="auto" loop>
+    <source src="assets/background-music.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- Core Website Logic -->
+  <script src="script.js"></script>
+</body>
+</html>
